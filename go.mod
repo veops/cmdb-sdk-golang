@@ -1,4 +1,4 @@
-module cmdb_sdk
+module cmdb-golang-sdk
 
 go 1.18
 
