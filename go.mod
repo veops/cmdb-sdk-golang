@@ -1,4 +1,4 @@
-module cmdb-golang-sdk
+module github.com/veops/cmdb-sdk-golang
 
 go 1.18
 
