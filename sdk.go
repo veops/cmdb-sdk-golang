@@ -43,7 +43,7 @@ func (h *Helper) buildAPIKey(u string, params map[string]any) string {
 	sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 	vals := strings.Join(
 		lo.Map(keys, func(k string, _ int) string {
-			return lo.Ternary(strings.HasPrefix(k, "-"), "", cast.ToString(params[k]))
+			return lo.Ternary(strings.HasPrefix(k, "_"), "", cast.ToString(params[k]))
 		}),
 		"")
 	sha := sha1.New()
