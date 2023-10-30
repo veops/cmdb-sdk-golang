@@ -1,5 +1,7 @@
 package cmdb_sdk
 
+import "fmt"
+
 type RetKey = string
 
 const (
@@ -69,4 +71,18 @@ type GetRelationResult struct {
 	Page     int              `json:"page"`
 	Result   []map[string]any `json:"result"`
 	Total    int              `json:"total"`
+}
+
+type HelperError struct {
+	HttpCode int    `json:"httpCode"`
+	Message  string `json:"message"`
+}
+
+func (e HelperError) Error() string {
+	return fmt.Sprintf("httpCode=%d message=%s", e.HttpCode, e.Message)
+
+}
+
+func NewHelperError(httpCode int, message string) error {
+	return HelperError{httpCode, message}
 }
