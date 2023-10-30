@@ -57,8 +57,11 @@ func (h *Helper) checkRespError(resp *resty.Response, err error) error {
 		return err
 	} else if resp.StatusCode() != 200 {
 		re := &ResponseError{}
-		json.Unmarshal(resp.Body(), re)
-		return fmt.Errorf("httpCode=%d message=%s", resp.StatusCode(), re.Message)
+		err := json.Unmarshal(resp.Body(), re)
+		if err != nil {
+			return NewHelperError(resp.StatusCode(), resp.String())
+		}
+		return NewHelperError(resp.StatusCode(), re.Message)
 	}
 	return nil
 }
